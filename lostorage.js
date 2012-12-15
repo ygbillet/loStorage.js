@@ -165,7 +165,21 @@
 
    };
 
-   var methods = 'set invert add increase decrease concat push extend remove empty get all'.split(' '); // Methods of _storage that need to be copied to storage and session.
+   _storage.findAll = function (type, regex) {
+
+      var result = [];
+
+      for (var i = 0, l = type.length; i < l; i++) {
+         key = type.key(i);
+         if (regex.test(key)) {         
+            result.push( this.get(type, key) );
+         }
+      }
+
+      return result ;
+   };   
+
+   var methods = 'set invert add increase decrease concat push extend remove empty get all findAll'.split(' '); // Methods of _storage that need to be copied to storage and session.
 
    var types = {
       storage: localStorage,
